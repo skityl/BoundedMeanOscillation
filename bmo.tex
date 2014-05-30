@@ -1,0 +1,94 @@
+\documentclass{unswmaths}
+
+\usepackage{unswshortcuts}
+
+\begin{document}
+
+\subject{}
+\author{}
+\title{}
+\studentno{}
+
+
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Img}{\operatorname{Im}}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\isom}{\cong}
+\newcommand{\id}{{\operatorname{id}}}
+\newcommand{\ha}{\mathbf{m}}
+\newcommand{\Circ}{\mathbb{T}}
+\newcommand{\BMO}{{BMO}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Diff}{\mathcal{D}}
+
+
+We consider functions on the circle $\Circ$, equipped
+with normalised Haar measure $\ha$.
+
+We denote the fourier transform $L^2(\circ,\ha) \rightarrow \ell^2(\Intgr)$ 
+by $\wedge$, and the inverse fourier transform by $\vee$. Explicitly,
+for $f \in L^2(\Circ)$, 
+\begin{equation*}
+    \hat{f}(n) = \int_{\Circ} f(\zeta)\zeta^{-n}\;d\ha(\zeta),
+\end{equation*}
+and for $s \in \ell^2(\Intgr)$,
+\begin{equation*}
+    \check{s}(z) = \sum_{k \in \Intgr} s(k)z^k.
+\end{equation*}
+Recall the standard result that this is an isometric isomorphism.
+
+We adopt the following notation for sequences. For $s \in \ell^2(\Intgr)$, write
+\begin{equation*}
+    s = (s(n)\;:\;n \in \Intgr).
+\end{equation*}
+
+Several important linear operators on $L^2(\Circ)$ can be defined by the Fourier
+transform. For example by the \emph{harmonic conjugate} $\tilde{f}$ of a $f \in L^2(\Circ)$, we mean
+\begin{equation*}
+    \tilde{f} = (\sgn(n)\hat{f}(n):n \in \Intgr)^{\vee}.
+\end{equation*}
+The Riesz projection, $\Proj_+$ and $\Proj_-$ are defined respectively for $f \in L^2(\Circ)$ by
+\begin{align*}
+        \widehat{\Proj_+ f}(n) &= \begin{cases} \hat{f}(n)\;\text{ if }n \geq 0\\
+        0\text{ otherwise.}\\
+   \end{cases}\\
+   \widehat{\Proj_- f}(n) &= \begin{cases} 0\text{ if }n \geq 0\\
+        \hat{f}(n)\text{ otherwise.}\\
+   \end{cases}
+\end{align*}
+
+Clearly the harmonic conjugation and Riesz projection operators are bounded. We may similarly
+define unbounded operators in the same way. For example, the differentiation operator $\Diff$ is given by
+\begin{equation*}
+    \Diff f = (n\hat{f}(n)\;:\;n \in \Intgr)^\vee.
+\end{equation*}
+
+Given $\varphi \in L^2(\Circ)$, we define $\Gamma_\varphi$ as the operator
+\begin{equation*}
+    \Gamma_\varphi f = (\sum_{k=0}^\infty \hat{\varphi}(k+n)\hat{f}(k)\;:\;n \in \Intgr)^\vee.
+\end{equation*}
+$\Gamma_\varphi$ is potentially unbounded. We have the following theorem which characterises
+those $\varphi$ for which $\Gamma_\varphi$ is bounded. 
+
+\begin{theorem}
+    $\Gamma_\varphi$ is bounded if and only if $\varphi \in L^\infty(\Circ)$.
+\end{theorem}
+\begin{proof}
+    Let $f \in L^2(\Circ)$. Since the fourier transform is isometric, we may compute the norm of $\Gamma_\varphi f$,
+    \begin{equation*}
+        \|\Gamma_\varphi f\|^2 = \sum_{
+    \end{equation*}
+\end{proof}
+
+\begin{definition}
+    The set $\BMO(\Circ)$ is given by
+    \begin{equation*}
+        BMO(\Circ) = \{\;f+\tilde{g}\;:\;f,g \in L^\infty(\Circ)\;\} \subset L^2(\Circ).
+    \end{equation*}
+\end{definition}
+
+
+
+\end{document}
