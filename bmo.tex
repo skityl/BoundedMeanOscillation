@@ -160,7 +160,7 @@ Hence, we may consider the quantised derivative $d\varphi$ as a function from $H
 \end{proof}
 
 The problem of determining the boundedness of $d\varphi$ is then reduced to the problem of determining
-the boundedness of operators of the form $\Proj_+M_\psi$ and $\Proj_-M_\psi$ for $\psi \in L^2(\Circ)$. We may simplify
+the boundedness of operators of the form $\Proj_+M_\psi:H^2_-(\Circ)\rightarrow H^2(\Circ)$ and $\Proj_-M_\psi:H^2(\Circ)\rightarrow H^2_-(\Circ)$ for $\psi \in L^2(\Circ)$. We may simplify
 this further with the following lemma:
 \begin{lemma}
     Let $\psi \in L^2(\Circ)$. Then
@@ -172,37 +172,36 @@ this further with the following lemma:
 \begin{proof}
     Let $e_k(z) = z^k$. 
 
-    This is again a simple computation. Let $m,n\in \Intgr$ with $m \geq 0$. Then
+    This is again a simple computation. Let $m,n\in \Intgr$ with $m \geq 0$ and $n < 0$. Then,
     \begin{align*}
-        \langle (\Proj_+M_\psi)z^n,z^m\rangle &= \int_{\Circ}\sum_{k=-n}^\infty \hat{\psi}(k)\zeta^{k+n-m}\;d\ha(\zeta)\\
-        &= \hat{\psi}(m-n)
-    \end{align*}
-    and if $m < 0$, then $\langle (\Proj_+M_\psi)z^n,z_m\rangle = 0$.
-    
-    Similarly, if $m \geq 0$,
-    \begin{align*}
-        \langle z^n, (\Proj_-M_{\overline{\psi})z^m\rangle &= \int_{\Circ} \sum_{k=-\infty}^{-m-1} \hat{\varphi}(k) \zeta^{n-m-k}\;d\ha(\zeta)\\
-        &= \psi(m-n).
+        \langle (\Proj_+M_\psi)e_n,e_m\rangle &= \int_{\Circ}\sum_{k>-n} \hat{\psi}(k)\zeta^{k+n-m}\;d\ha(\zeta)\\
+        &= \hat{\psi}(m-n).
     \end{align*}
     
+    Similarly,
+    \begin{align*}
+        \langle e_n, (\Proj_-M_{\overline{\psi}})e_m \rangle &= \int_{\Circ} \sum_{k > m} \hat{\varphi}(k) \zeta^{n-m+k}\;d\ha(\zeta)\\
+                                                &= \hat{\psi}(m-n).
+    \end{align*}
+    
+    Hence, $(\Proj_+M_\psi)^* = \Proj_-M_{\overline{\psi}}$.
+
 \end{proof}
 
-
-Given $\varphi \in L^2(\Circ)$, we define $\Gamma_\varphi$ as the operator
+Therefore, we only need to study operators of the form $\Proj_-M_\psi$. So for $\psi \in L^2(\Circ)$, define
 \begin{equation*}
-    \Gamma_\varphi f = (\sum_{k=0}^\infty \hat{\varphi}(k+n)\hat{f}(k)\;:\;n \in \Intgr)^\vee.
+    H_\psi := \Proj_-M_\psi:H^2\rightarrow H^2_-.
 \end{equation*}
-$\Gamma_\varphi$ is potentially unbounded. We have the following theorem which characterises
-those $\varphi$ for which $\Gamma_\varphi$ is bounded. 
-\begin{theorem}
-    $\Gamma_\varphi$ is bounded if and only if $\varphi \in L^\infty(\Circ)$.
-\end{theorem}
-\begin{proof}
-    Let $f \in L^2(\Circ)$. Since the fourier transform is isometric, we may compute the norm of $\Gamma_\varphi f$,
-    \begin{equation*}
-%        \|\Gamma_\varphi f\|^2 = \sum_{
-    \end{equation*}
-\end{proof}
+
+We study these operators using the fourier transform. Use the standard basis $\{z^n\}_{n\geq 0}$
+on $H^2(\Circ)$ and the standard basis with negative indices $\{z^{-n}\}_{n \geq 0}$ on $H^2(\Circ)$.
+
+\begin{lemma}
+    Let $\psi \in L^2(\Circ)$. Then in the bases above, $H_\psi$ has matrix representation
+    with $(n,k)$th entry $\hat{\psi}(-n-k)$. 
+\end{lemma}
+
+
 
 \begin{definition}
     The set $\BMO(\Circ)$ is given by
@@ -210,6 +209,10 @@ those $\varphi$ for which $\Gamma_\varphi$ is bounded.
         BMO(\Circ) = \{\;f+\tilde{g}\;:\;f,g \in L^\infty(\Circ)\;\} \subset L^2(\Circ).
     \end{equation*}
 \end{definition}
+
+\begin{theorem}
+    Let $\psi \in L^2(\Circ)$, $H_\psi$ is bounded if and only if $\psi \in \BMO(\Circ)$.
+\end{theorem}
 
 
 \begin{thebibliography}{9}
