@@ -17,17 +17,37 @@
 \newcommand{\Proj}{\mathbb{P}}
 \newcommand{\isom}{\cong}
 \newcommand{\id}{{\operatorname{id}}}
-\newcommand{\ha}{\mathbf{m}}
+\newcommand{\ha}{\boldsymbol{m}}
 \newcommand{\Circ}{\mathbb{T}}
 \newcommand{\BMO}{{BMO}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Diff}{\mathcal{D}}
 
+\section*{Introduction}
+The purpose of these notes is to give a complete proof of the characterisation of functions
+$f$ on the circle such that the quantised derivative $df$ is bounded. The quantised derivative
+is introduced in Connes \cite{connes94}. These notes use ideas and notation from Peller \cite{peller}.
 
-We consider functions on the circle $\Circ$, equipped
+\section*{Notation} 
+We consider functions on the circle $\Circ = \{z \in \Cplx\;:\;|z| = 1\}$, equipped
 with normalised Haar measure $\ha$.
 
-We denote the fourier transform $L^2(\circ,\ha) \rightarrow \ell^2(\Intgr)$ 
+The space $L^2(\Circ,\ha)$ as usual is the hilbert space of square-integrable functions
+on $\Circ$ equipped with the inner product
+\begin{equation*}
+    \langle f,g\rangle = \int_{\Circ} f(\zeta)\overline{g(\zeta)}\;d\ha(\zeta).
+\end{equation*}
+for $f,g \in L^2(\Circ, \ha)$.
+
+For convenience, we will denote $L^2(\Circ,\ha)$ as $L^p(\Circ)$.
+
+
+Sequences indexed by a set $S$ will be denoted in parentheses as
+\begin{equation*}
+    (s_k\;:\;k \in S).
+\end{equation*}
+
+We denote the fourier transform $L^2(\Circ,\ha) \rightarrow \ell^2(\Intgr)$ 
 by $\wedge$, and the inverse fourier transform by $\vee$. Explicitly,
 for $f \in L^2(\Circ)$, 
 \begin{equation*}
@@ -37,19 +57,26 @@ and for $s \in \ell^2(\Intgr)$,
 \begin{equation*}
     \check{s}(z) = \sum_{k \in \Intgr} s(k)z^k.
 \end{equation*}
-Recall the standard result that this is an isometric isomorphism.
+Recall the standard result that this is an isometric isomorphism of Hilbert spaces.
 
-We adopt the following notation for sequences. For $s \in \ell^2(\Intgr)$, write
+So for example, in our notation the inverse fourier transform of a sequence
 \begin{equation*}
-    s = (s(n)\;:\;n \in \Intgr).
+    (s_k\;:\;k \in S)
+\end{equation*}
+is denoted
+\begin{equation*}
+    (s_k\;:\;k \in S)^\vee.
 \end{equation*}
 
 Several important linear operators on $L^2(\Circ)$ can be defined by the Fourier
-transform. For example by the \emph{harmonic conjugate} $\tilde{f}$ of a $f \in L^2(\Circ)$, we mean
+transform. For example define the \emph{harmonic conjugate} $\tilde{f}$ of $f \in L^2(\Circ)$ as
 \begin{equation*}
-    \tilde{f} = (\sgn(n)\hat{f}(n):n \in \Intgr)^{\vee}.
+    \tilde{f} := (\sgn(n)\hat{f}(n):n \in \Intgr)^{\vee}.
 \end{equation*}
-The Riesz projection, $\Proj_+$ and $\Proj_-$ are defined respectively for $f \in L^2(\Circ)$ by
+where $\sgn(n) = -1$ if $n < 0$ and $\sgn(n) = 1$ otherwise.
+
+
+The Riesz projections, $\Proj_+$ and $\Proj_-$ are defined respectively for $f \in L^2(\Circ)$ by
 \begin{align*}
         \widehat{\Proj_+ f}(n) &= \begin{cases} \hat{f}(n)\;\text{ if }n \geq 0\\
         0\text{ otherwise.}\\
@@ -65,20 +92,115 @@ define unbounded operators in the same way. For example, the differentiation ope
     \Diff f = (n\hat{f}(n)\;:\;n \in \Intgr)^\vee.
 \end{equation*}
 
+We also define the important \emph{Hilbert transform}, $H$, as
+\begin{equation*}
+    H = \frac{1}{2}(\Proj_+-\Proj_-) = \Proj_+-\frac{1}{2}I.
+\end{equation*}
+where $I$ is the identity map.
+
+For $\varphi \in L^2(\Circ)$, the pointwise multiplication operator $M_\varphi:L^2(\Circ)\rightarrow L^2(\Circ)$
+is
+\begin{equation*}
+    M_\varphi f(z) = \varphi(z)f(z).
+\end{equation*}
+for almost all $z \in \Circ$ and $f \in L^2(\Circ)$. $M_\varphi$ is bounded and defined everywhere if $\varphi \in L^\infty(\Circ)$, however
+otherwise $M_\varphi$ may be unbounded or not everywhere defined. $M_\varphi$ is at least defined on the dense subspace
+of polynomials in $L^2(\Circ)$. 
+
+\section*{The Quantised Derivative}
+
+\begin{definition}
+    For $\varphi \in L^2(\Circ)$, the \emph{quantised derivative} of $\varphi$ is the (potentially unbounded, densely defined) linear operator
+    \begin{equation*}
+        d\varphi := [H,M_\varphi] = [\Proj_+,M_\varphi].
+    \end{equation*}
+\end{definition}
+The purpose of these notes is to characterise the boundedness of $d\varphi$ in terms of $\varphi$.
+
+We require an alternative description of $d\varphi$. For this, we introduce the Hardy spaces.
+\begin{definition}
+    For $p\geq 2$, define
+    \begin{align*}
+        H^p(\Circ) := \Proj_+ L^p(\Circ)\\
+        H^p_-(\Circ) := \Proj_- L^p(\Circ).
+    \end{align*}
+    So that $L^2(\Circ) = H^2(\Circ)\oplus H^2_-(\Circ)$. 
+\end{definition}
+
+Hence, we may consider the quantised derivative $d\varphi$ as a function from $H^2(\Circ)\oplus H^2_-(\Circ)$.
+
+\begin{lemma}
+    Let $\varphi \in L^2(\Circ)$ and define $\varphi_+ := \Proj_+ \varphi$ and $\varphi_- := \Proj_- \varphi$. Then $d\varphi:H^2(\Circ)\oplus H^2_-(\Circ)\rightarrow L^2(\Circ)$ may be written as
+    \begin{equation*}
+        d\varphi\begin{pmatrix}
+            f\\g
+        \end{pmatrix} = \begin{pmatrix}
+            (\Proj_+M_{\varphi_+})g\\
+            -(\Proj_-M_{\varphi_-})f
+        \end{pmatrix}
+    \end{equation*}
+    for $f \in H^2(\Circ)$ and $g \in H^2_-(\Circ)$.
+\end{lemma}
+\begin{proof}
+    This is a simple computation. Let $f \in H^2(\Circ)$ and $g \in H^2_-(\Circ)$. Then,
+    \begin{equation*}
+        d\varphi(f+g) = [\Proj_+,M_{\varphi_+}+M_{\varphi_-}](f+g).
+    \end{equation*}
+    Hence,
+    \begin{align*}
+        d\varphi(f+g) &= [\Proj_+,M_{\varphi_+}]f + [\Proj_+,M_{\varphi_-}]f + [\Proj_+,M_{\varphi_+}]g + [\Proj_+,M_{\varphi_-}]g\\
+        &= (\Proj_+M_{\varphi_-})f+(\Proj_+M_{\varphi_+})g-M_{\varphi_-}f
+    \end{align*}
+    since $\Proj_+f = f$ and $\Proj_+g = 0$.
+    
+    By the identity $\Proj_+ = I-\Proj_-$, we find
+    \begin{equation*}
+        d\varphi(f+g) = (\Proj_+M_{\varphi_+})g - (\Proj_-M_{\varphi_-})f.
+    \end{equation*}
+\end{proof}
+
+The problem of determining the boundedness of $d\varphi$ is then reduced to the problem of determining
+the boundedness of operators of the form $\Proj_+M_\psi$ and $\Proj_-M_\psi$ for $\psi \in L^2(\Circ)$. We may simplify
+this further with the following lemma:
+\begin{lemma}
+    Let $\psi \in L^2(\Circ)$. Then
+    \begin{equation*}
+        (\Proj_+M_\psi)^* = \Proj_-M_{\overline{\psi}}.
+    \end{equation*}
+    and therefore $\Proj_+M_\psi$ is bounded if and only if $\Proj_-M_{\overline{\psi}}$ is.
+\end{lemma}
+\begin{proof}
+    Let $e_k(z) = z^k$. 
+
+    This is again a simple computation. Let $m,n\in \Intgr$ with $m \geq 0$. Then
+    \begin{align*}
+        \langle (\Proj_+M_\psi)z^n,z^m\rangle &= \int_{\Circ}\sum_{k=-n}^\infty \hat{\psi}(k)\zeta^{k+n-m}\;d\ha(\zeta)\\
+        &= \hat{\psi}(m-n)
+    \end{align*}
+    and if $m < 0$, then $\langle (\Proj_+M_\psi)z^n,z_m\rangle = 0$.
+    
+    Similarly, if $m \geq 0$,
+    \begin{align*}
+        \langle z^n, (\Proj_-M_{\overline{\psi})z^m\rangle &= \int_{\Circ} \sum_{k=-\infty}^{-m-1} \hat{\varphi}(k) \zeta^{n-m-k}\;d\ha(\zeta)\\
+        &= \psi(m-n).
+    \end{align*}
+    
+\end{proof}
+
+
 Given $\varphi \in L^2(\Circ)$, we define $\Gamma_\varphi$ as the operator
 \begin{equation*}
     \Gamma_\varphi f = (\sum_{k=0}^\infty \hat{\varphi}(k+n)\hat{f}(k)\;:\;n \in \Intgr)^\vee.
 \end{equation*}
 $\Gamma_\varphi$ is potentially unbounded. We have the following theorem which characterises
 those $\varphi$ for which $\Gamma_\varphi$ is bounded. 
-
 \begin{theorem}
     $\Gamma_\varphi$ is bounded if and only if $\varphi \in L^\infty(\Circ)$.
 \end{theorem}
 \begin{proof}
     Let $f \in L^2(\Circ)$. Since the fourier transform is isometric, we may compute the norm of $\Gamma_\varphi f$,
     \begin{equation*}
-        \|\Gamma_\varphi f\|^2 = \sum_{
+%        \|\Gamma_\varphi f\|^2 = \sum_{
     \end{equation*}
 \end{proof}
 
@@ -89,6 +211,24 @@ those $\varphi$ for which $\Gamma_\varphi$ is bounded.
     \end{equation*}
 \end{definition}
 
+
+\begin{thebibliography}{9}
+\bibitem{connes94}
+    Alain Connes, 
+    \emph{Noncommutative Geometry}
+     Academic Press, 
+     San Diego, 
+     CA, 
+     1994
+\bibitem{peller}
+    Vladimir Peller,
+    \emph{Hankel Operators and their Applications}
+    Springer-Verlag,
+    New York, 
+    NY,
+    2003
+    
+\end{thebibliography}
 
 
 \end{document}
