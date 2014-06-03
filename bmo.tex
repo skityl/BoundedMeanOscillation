@@ -22,6 +22,7 @@
 \newcommand{\BMO}{{BMO}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Diff}{\mathcal{D}}
+\newcommand{\pvint}{\mathrm{p.v.}\int}
 
 \section*{Introduction}
 The purpose of these notes is to give a complete proof of the characterisation of functions
@@ -32,14 +33,14 @@ is introduced in Connes \cite{connes94}. These notes use ideas and notation from
 We consider functions on the circle $\Circ = \{z \in \Cplx\;:\;|z| = 1\}$, equipped
 with normalised Haar measure $\ha$.
 
-The space $L^2(\Circ,\ha)$ as usual is the hilbert space of square-integrable functions
+The space $L^2(\Circ,\ha)$ as usual is the Hilbert space of square-integrable functions
 on $\Circ$ equipped with the inner product
 \begin{equation*}
     \langle f,g\rangle = \int_{\Circ} f(\zeta)\overline{g(\zeta)}\;d\ha(\zeta).
 \end{equation*}
 for $f,g \in L^2(\Circ, \ha)$.
 
-For convenience, we will denote $L^2(\Circ,\ha)$ as $L^p(\Circ)$.
+For convenience, we will denote $L^p(\Circ,\ha)$ as $L^p(\Circ)$.
 
 
 Sequences indexed by a set $S$ will be denoted in parentheses as
@@ -47,11 +48,11 @@ Sequences indexed by a set $S$ will be denoted in parentheses as
     (s_k\;:\;k \in S).
 \end{equation*}
 
-We denote the fourier transform $L^2(\Circ,\ha) \rightarrow \ell^2(\Intgr)$ 
-by $\wedge$, and the inverse fourier transform by $\vee$. Explicitly,
+We denote the Fourier transform $L^2(\Circ,\ha) \rightarrow \ell^2(\Intgr)$ 
+by $\wedge$, and the inverse Fourier transform by $\vee$. Explicitly,
 for $f \in L^2(\Circ)$, 
 \begin{equation*}
-    \hat{f}(n) = \int_{\Circ} f(\zeta)\zeta^{-n}\;d\ha(\zeta),
+    \hat{f}(n) = \int_{\Circ} f(\tau)\tau^{-n}\;d\ha(\tau),
 \end{equation*}
 and for $s \in \ell^2(\Intgr)$,
 \begin{equation*}
@@ -59,13 +60,19 @@ and for $s \in \ell^2(\Intgr)$,
 \end{equation*}
 Recall the standard result that this is an isometric isomorphism of Hilbert spaces.
 
-So for example, in our notation the inverse fourier transform of a sequence
+So for example, in our notation the inverse Fourier transform of a sequence
 \begin{equation*}
-    (s_k\;:\;k \in S)
+    (s_k\;:\;k \in \Intgr)
 \end{equation*}
 is denoted
 \begin{equation*}
-    (s_k\;:\;k \in S)^\vee.
+    (s_k\;:\;k \in \Intgr)^\vee.
+\end{equation*}
+
+If we have a sequence $(s_k\;:\;k \in \Ntrl)$ indexed by $\Ntrl$, interpret its
+inverse Fourier transform as
+\begin{equation*}
+    (s_k\;:\;k \in \Ntrl)^\vee(z) = \sum_{k=0}^\infty s_kz^k.
 \end{equation*}
 
 Several important linear operators on $L^2(\Circ)$ can be defined by the Fourier
@@ -85,9 +92,10 @@ The Riesz projections, $\Proj_+$ and $\Proj_-$ are defined respectively for $f \
         \hat{f}(n)\text{ otherwise.}\\
    \end{cases}
 \end{align*}
+Note that $\Proj_++\Proj_- = I$, where $I$ is the identity map.
 
-Clearly the harmonic conjugation and Riesz projection operators are bounded. We may similarly
-define unbounded operators in the same way. For example, the differentiation operator $\Diff$ is given by
+Clearly the harmonic conjugation and Riesz projection operators are bounded. We may
+define unbounded operators similarly. For example, the differentiation operator $\Diff$ is given by
 \begin{equation*}
     \Diff f = (n\hat{f}(n)\;:\;n \in \Intgr)^\vee.
 \end{equation*}
@@ -96,9 +104,8 @@ We also define the important \emph{Hilbert transform}, $H$, as
 \begin{equation*}
     H = \frac{1}{2}(\Proj_+-\Proj_-) = \Proj_+-\frac{1}{2}I.
 \end{equation*}
-where $I$ is the identity map.
 
-For $\varphi \in L^2(\Circ)$, the pointwise multiplication operator $M_\varphi:L^2(\Circ)\rightarrow L^2(\Circ)$
+For $\varphi \in L^2(\Circ)$, the point-wise multiplication operator $M_\varphi:L^2(\Circ)\rightarrow L^2(\Circ)$
 is
 \begin{equation*}
     M_\varphi f(z) = \varphi(z)f(z).
@@ -130,14 +137,11 @@ We require an alternative description of $d\varphi$. For this, we introduce the 
 Hence, we may consider the quantised derivative $d\varphi$ as a function from $H^2(\Circ)\oplus H^2_-(\Circ)$.
 
 \begin{lemma}
-    Let $\varphi \in L^2(\Circ)$ and define $\varphi_+ := \Proj_+ \varphi$ and $\varphi_- := \Proj_- \varphi$. Then $d\varphi:H^2(\Circ)\oplus H^2_-(\Circ)\rightarrow L^2(\Circ)$ may be written as
+    Let $\varphi \in L^2(\Circ)$ and define $\varphi_+ := \Proj_+ \varphi$ and $\varphi_- := \Proj_- \varphi$. Then $d\varphi:H^2(\Circ)\oplus H^2_-(\Circ)\rightarrow H^2(\Circ)\oplus H^2_-(\Circ)$ may be written as
     \begin{equation*}
-        d\varphi\begin{pmatrix}
-            f\\g
-        \end{pmatrix} = \begin{pmatrix}
-            (\Proj_+M_{\varphi_+})g\\
+        d\varphi(f\oplus g) = 
+            (\Proj_+M_{\varphi_+})g \oplus
             -(\Proj_-M_{\varphi_-})f
-        \end{pmatrix}
     \end{equation*}
     for $f \in H^2(\Circ)$ and $g \in H^2_-(\Circ)$.
 \end{lemma}
@@ -193,13 +197,14 @@ Therefore, we only need to study operators of the form $\Proj_-M_\psi$. So for $
     H_\psi := \Proj_-M_\psi:H^2\rightarrow H^2_-.
 \end{equation*}
 
-We study these operators using the fourier transform. Use the standard basis $\{z^n\}_{n\geq 0}$
+We study these operators using the Fourier transform. Use the standard basis $\{z^n\}_{n\geq 0}$
 on $H^2(\Circ)$ and the standard basis with negative indices $\{z^{-n}\}_{n \geq 0}$ on $H^2(\Circ)$.
 
-\begin{lemma}
-    Let $\psi \in L^2(\Circ)$. Then in the bases above, $H_\psi$ has matrix representation
-    with $(n,k)$th entry $\hat{\psi}(-n-k)$. 
-\end{lemma}
+Let $\psi \in L^2(\Circ)$. Then in the bases above, $H_\psi$ has matrix representation
+with $(n,k)$th entry $\hat{\psi}(-n-k)$. 
+
+This means that $H_\psi$ is represented by a \emph{Hankel matrix}. So we require
+results on the boundedness of Hankel matrices
 
 
 
@@ -208,29 +213,182 @@ on $H^2(\Circ)$ and the standard basis with negative indices $\{z^{-n}\}_{n \geq
     \begin{equation*}
         BMO(\Circ) = \{\;f+\tilde{g}\;:\;f,g \in L^\infty(\Circ)\;\} \subset L^2(\Circ).
     \end{equation*}
+    $\BMO(\Circ)$ is a vector space since harmonic conjugation is linear.
 \end{definition}
+$\BMO(\Circ)$ is usually given a different definition, for example as in \cite[p.~216]{garnett}.
+For a proof of the equivalence of this definition, see \cite[p.~240]{garnett}.
+
+
+\begin{lemma}
+    $\varphi \in \BMO(\Circ)$ if and only if $\Proj_+\varphi$ and $\Proj_-\varphi$ are in $\BMO(\Circ)$.
+\end{lemma}
+\begin{proof}
+    If $\Proj_+\varphi$ and $\Proj_-\varphi$ are in $\BMO(\Circ)$, then $\varphi = \Proj_+\varphi +\Proj_-\varphi$ is
+    in $\BMO(\Circ)$.
+    
+    Conversely, suppose $\varphi \in \BMO(\Circ)$. Then there are $f,g \in L^\infty(\Circ)$ such that
+    \begin{equation*}
+        \varphi = f + \tilde{g}.
+    \end{equation*}
+    Hence,
+    \begin{equation*}
+        \Proj_+\varphi = \Proj_+(f+g) = \frac{1}{2}(f+g+\tilde{f}+\tilde{g}) \in \BMO(\Circ).
+    \end{equation*}
+    Similarly,
+    \begin{equation*}
+        \Proj_+\varphi = \Proj_-(f-g) = \frac{1}{2}(f-g-\tilde{f}+\tilde{g}) \in \BMO(\Circ).
+    \end{equation*}
+\end{proof}
+
+
+\section*{Infinite Hankel matrices}
+Let $s = (s_k\;:\;k \in \Ntrl)$ be an infinite sequence. The associated
+Hankel matrix is the infinite matrix $\Gamma_s$ with $(j,k)$th entry
+$s_{k+j}$. We may consider such a matrix as as an operator
+on the dense subset of finitely supported sequences in $\ell^2(\Ntrl)$. We will investigate conditions
+for $\Gamma_s$ to be bounded, and therefore extend to a linear operator on $\ell^2(\Ntrl)$.
 
 \begin{theorem}
-    Let $\psi \in L^2(\Circ)$, $H_\psi$ is bounded if and only if $\psi \in \BMO(\Circ)$.
+    The operator $\Gamma_s$ is bounded if and only if $\check{s} \in \BMO(\Circ)$.
 \end{theorem}
+\begin{proof}
+    Suppose first that $\check{s} \in L^\infty(\Circ)$. Let $a = (a_k\;:\;k \in \Ntrl)$
+    and $b = (b_k\;:\; k\in \Ntrl)$ be finitely supported sequences. Let $q(z) = \check{a}(z)\check{\overline{b}}(z)$. Then,
+    \begin{align*}
+        \langle \Gamma_s a,b\rangle  &=  \sum_{j,k\geq0} s_{j+k}a_j\overline{b_k}\\
+        &= \sum_{m\geq 0} s_m \sum_{j=0}^m a_j \overline{b_{m-j}}\\
+        &= \sum_{m\geq 0} s_m \hat{q}(m)\\
+        &= \int_\Circ \check{s}(\tau)q(\overline{\tau})\;d\ha(\tau).
+    \end{align*}
+    Hence,
+    \begin{equation*}
+        |\langle \Gamma_s a,b\rangle| \leq \|\check{s}\|_\infty \|q\|_1 \leq \|\check{s}\|_\infty \|\check{a}\|_{L^2}\|\check{b}\|_{L^2} = \|\check{s}\|_\infty \|a\|_{\ell^2}\|b\|_{\ell^2}.
+    \end{equation*}
+    Hence $\Gamma_s$ is bounded. 
+    
+    Conversely, suppose that $\Gamma_s$ is bounded. 
+    
+    Define the linear functional $\mathcal{L}$ on the set of polynomials 
+    in $H^1(\Circ)$ as
+    \begin{equation*}
+        \mathcal{L}q = \sum_{n\geq 0} s_n\hat{q}(n).
+    \end{equation*}
+    If $s \in \ell^1(\Ntrl)$, then $\mathcal{L}$ is bounded by the triangle inequality.
+    
+\end{proof}
 
+\section*{Integral representation of the quantised derivative}
+The following theorem allows us to describe the quantised derivative as an integral operator.
+\begin{lemma}
+\label{singularIntegral}
+    \begin{equation*}
+        \mathrm{p.v.}\int_\Circ \frac{1}{\tau-1}\;d\ha(\tau) = -\frac{1}{2}
+    \end{equation*}
+    where the principal value is defined to be
+    \begin{equation*}
+        \lim_{\varepsilon\rightarrow 0} \int_{|\tau-1|>\varepsilon} \frac{1}{\tau-1}\;d\ha(\tau).
+    \end{equation*}
+\end{lemma} 
+\begin{proof}
+    Note that
+    \begin{equation*}
+        \pvint_\Circ \frac{1}{\tau-1}\;d\ha(\tau) = \pvint_{\im(\tau) > 0} \frac{1}{\overline{\tau}-1}+\frac{1}{\tau-1}\;d\ha(\tau).
+    \end{equation*}
+    Hence,
+    \begin{equation*}
+        \pvint_\Circ \frac{1}{\tau-1}\;d\ha(\tau) = \pvint_{\operatorname{Im}(\tau)>0} 2\operatorname{Re}\left(\frac{1}{\tau-1}\right)\;d\ha(\tau).
+    \end{equation*}
+    However, if $\tau = \exp(i\theta) \neq 1$, then
+    \begin{align*}
+        \operatorname{Re}\left(\frac{1}{\tau-1}\right) &= \operatorname{Re}\left(\frac{e^{-i\theta/2}}{2i\sin(\theta/2)}\right)\\
+        &= -\frac{1}{2}.
+    \end{align*}
+    Hence,
+    \begin{equation*}
+        \pvint_\Circ \frac{1}{\tau-1}\;d\ha(\tau) = 2\pvint_{\operatorname{Im}(\tau)>0} -\frac{1}{2}\;d\ha(\tau) = -\frac{1}{2}.
+    \end{equation*}
+\end{proof}
+\begin{theorem}
+    Let $\varphi \in L^2(\Circ)$. Then
+    \begin{equation*}
+        \Proj_+\varphi(z) = \mathrm{p.v.}\int_\Circ \frac{\varphi(\tau)}{1-\overline{\tau}z}\;d\ha(\tau)+\frac{1}{2}\varphi(z)
+    \end{equation*}
+    and hence,
+    \begin{equation*}
+        H\varphi(z) = \mathrm{p.v.}\int_\Circ \frac{\varphi(\tau)}{1-\overline{\tau}z}\;d\ha(\tau).
+    \end{equation*}
+    where in both equations, the principal value means that the integral is to be taken along the set $\{ \zeta\;:|\zeta-z| > \varepsilon\}$
+    and then consider the limit $\varepsilon\rightarrow 0$.
+\end{theorem}
+\begin{proof}
+    It is sufficient to check this on the basis elements $e_n(z) = z^n$ for $n \in \Intgr$.
+    
+    First let $n \geq 0$. Then
+    \begin{equation*}
+        \mathrm{p.v.}\int_\Circ \frac{\tau^n}{1-\overline{\tau}z}\;d\ha(\tau) = \mathrm{p.v.}\int_\Circ \frac{z^n\tau^n}{1-\overline{\tau}}\;d\ha(\tau)
+    \end{equation*}
+    by translation invariance.
+    Hence,
+    \begin{align*}
+        \mathrm{p.v.}\int_{\Circ} \frac{\tau^n}{1-\overline{\tau}z}\;d\ha(\tau) &= z^n\mathrm{p.v.}\int_\Circ \frac{\tau^{n+1}}{\tau-1}\;d\ha(\tau) \\
+        &= z^n \mathrm{p.v.}\int_\Circ \frac{\tau^{n+1}-1}{\tau-1}+\frac{1}{\tau-1}\;d\ha(\tau)\\
+        &= z^n \mathrm{p.v.}\int_\Circ 1+\tau+\tau^2+\cdots+\tau^{n}\;d\ha(\tau)+z^n\mathrm{p.v.}\int_\Circ \frac{1}{\tau-1}\;d\ha(\tau)\\
+        &= z^n + z^n\mathrm{p.v.}\int_\Circ \frac{1}{\tau-1}\;d\ha(\tau)\\
+        &= \frac{1}{2}z^n
+    \end{align*}
+    where the last step follows from lemma \ref{singularIntegral}.
+    
+    Suppose $n > 0$, then
+    \begin{equation*}
+        \mathrm{p.v.}\int_\Circ \frac{\tau^{-n}}{1-\overline{\tau}z}\;d\ha(\tau) = z^{-n} \mathrm{p.v.}\int_{\Circ} \frac{\tau{1-n}}{\tau-1}\;d\ha(\tau)
+    \end{equation*}
+    by translation invariance. Hence,
+    \begin{align*}
+        \mathrm{p.v.}\int_\Circ \frac{\tau^{-n}}{1-\overline{\tau}z}\;d\ha(\tau) &= z^{-n} \mathrm{p.v.} \int_\Circ \frac{1}{\tau^n-\tau^{n-1}}\;d\ha(\tau)\\
+        &= z^{-n}\overline{\mathrm{p.v.}\int_\Circ \frac{\tau^n}{1-\tau}}\\
+        &= -\frac{1}{2}z^{-n}.
+    \end{align*}
+    
+    Hence, 
+    \begin{equation*}
+        \pvint_\Circ \frac{\tau^n}{1-\overline{\tau}z}\;d\ha(\tau) = \begin{cases}
+            \frac{1}{2}z^n\text{ if }n \geq 0\\
+            -\frac{1}{2}z^n\text{ if }n < 0.
+        \end{cases}
+    \end{equation*}
+    
+    So the result follows.
+    
+\end{proof}
+
+So we have the following integral form of the quantised derivative. Let $\varphi,f \in L^2(\Circ)$.
+Then
+\begin{equation*}
+    d\varphi(f)(z) = ([H,M_\varphi]f)(z) = \pvint_\Circ \frac{\varphi(z)-\varphi(\tau)}{1-\overline{\tau}z}f(\tau)\;d\ha(\tau).
+\end{equation*}
 
 \begin{thebibliography}{9}
 \bibitem{connes94}
-    Alain Connes, 
+     Connes A., 
     \emph{Noncommutative Geometry}
      Academic Press, 
      San Diego, 
      CA, 
      1994
 \bibitem{peller}
-    Vladimir Peller,
+    Peller V.V.,
     \emph{Hankel Operators and their Applications}
     Springer-Verlag,
     New York, 
     NY,
-    2003
-    
+    2003    
+\bibitem{garnett}
+    Garnett J.B.
+    \emph{Bounded analytic functions}
+    Springer-Verlag,
+    New York,
+    NY,
+    2007    
 \end{thebibliography}
 
 
